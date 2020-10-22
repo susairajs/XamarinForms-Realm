@@ -17,7 +17,6 @@ namespace XamarinFormsRelam
             InitializeComponent();
             imgBanner.Source = ImageSource.FromResource("XamarinFormsRelam.images.banner.png");
             var realmDB = Realm.GetInstance();
-
             List<Student> studentList = realmDB.All<Student>().ToList();
             listStudent.ItemsSource=studentList;
         }
@@ -28,10 +27,7 @@ namespace XamarinFormsRelam
             var students= realmDB.All<Student>().ToList();
             var maxStudentId = 0;
             if (students.Count!=0)
-            {
-
                  maxStudentId = students.Max(s=>s.StudentID);
-            }
             Student student = new Student()
             {
                 StudentID = maxStudentId + 1,
@@ -44,7 +40,6 @@ namespace XamarinFormsRelam
             txtStudentName.Text = string.Empty;
             List<Student> studentList = realmDB.All<Student>().ToList();
             listStudent.ItemsSource = studentList;
-
         }
         private async void listOptions_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
@@ -54,7 +49,6 @@ namespace XamarinFormsRelam
             {
                 switch (selectedItem.OptionText)
                 {
-
                     case "Edit":
                         popupOptionView.IsVisible = false;
                         popupEditView.IsVisible = true;
@@ -79,10 +73,8 @@ namespace XamarinFormsRelam
                         popupOptionView.IsVisible = false;
                         break;
                 }
-
                 optionList.SelectedItem = null;
             }
-
         }
         protected override void OnAppearing()
         {
@@ -93,7 +85,6 @@ namespace XamarinFormsRelam
         private void listStudent_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             Student selectedStudent = listStudent.SelectedItem as Student;
-            
             if(selectedStudent!=null)
             {
                 optionItems.Add(new OptionItems { OptionText = "Edit",StudentId=selectedStudent.StudentID});
@@ -102,7 +93,6 @@ namespace XamarinFormsRelam
                 optionList.ItemsSource = optionItems;
                 popupOptionView.IsVisible = true;
             }
-            
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -122,7 +112,6 @@ namespace XamarinFormsRelam
             await DisplayAlert("Success", "Student Updated","OK");
             txtEditStudentName.Text = string.Empty;
             popupEditView.IsVisible = false;
-
         }
     }
 }
